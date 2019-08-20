@@ -38,12 +38,36 @@ Pain Point Overflow Max 3000 is a full stack application that allows people to p
 
 ## Routes/Endpoints
 
-| 		     | URL           | HTTP VERB |
-| ---------- |:-------------:| ---------:|
-| /user	     | /register     | POST 	 |
-| 		     | /login        |   GET 	 |
+| 		     | URL           | HTTP VERB | ACTION	  | DESCRIPTION	  	  				 	 |
+| ---------- |:-------------:| ---------:| ----------:| ------------------------------------:|
+| /user	     |/register      | POST 	 | new/create | creates a new user 					 |
+| 		     |/login         | GET   	 | index      | logs user in       					 |
+|		     |/:id      	 | GET 	     | show 	  | shows profile page for user with :id |
+| 		     |/:id/edit      | GET   	 | edit       | show edit form for user with :id     |
+|		     |/:id      	 | PUT 	     | update 	  | updates user with :id				 |
+| 		     |/:id           | DELETE    | delete     | deletes user with :id      			 |
+
+| 		     | URL           | HTTP VERB | ACTION	  | DESCRIPTION	  	   	   |
+| ---------- |:-------------:| ---------:| ----------:| ----------------------:|
+| /tags	     |/		         | GET  	 | index	  | show all industry tags |
 
 
+| 		     | URL           | HTTP VERB | ACTION	  | DESCRIPTION	  	  				 	 |
+| ---------- |:-------------:| ---------:| ----------:| ------------------------------------:|
+| /ideas	 |/new	         | GET 	 	 | new 		  | show form to create ideas			 |
+| 		     |/        		 | POST   	 | create     | create idea       					 |
+|		     |/:id      	 | GET 	     | show 	  | shows idea page with :id 			 |
+| 		     |/:id/edit      | GET   	 | edit       | show edit form for idea with :id     |
+|		     |/:id      	 | PUT 	     | update 	  | updates idea with :id				 |
+
+
+| 		     | URL           | HTTP VERB | ACTION	  | DESCRIPTION	  	  				 	 |
+| ---------- |:-------------:| ---------:| ----------:| ------------------------------------:|
+| /solutions |/new	         | GET 		 | new 		  | show form to create solution 		 |
+| 		     |/     	     | POST   	 | index      | creat solution     					 |
+|		     |/:id      	 | GET 	     | show 	  | shows solution with :id 			 |
+| 		     |/:id/edit      | GET   	 | edit       | show edit form for solution with :id |
+|		     |/:id      	 | PUT 	     | update 	  | updates solution with :id			 |
 
 
 
