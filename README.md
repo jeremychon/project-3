@@ -43,6 +43,8 @@ Pain Point Overflow Max 3000 is a full stack application that allows people to p
 | 		     | HTTP VERB | URL            | DESCRIPTION	  	  		             |
 | ---------- | :---------| :--------------| :------------------------------------|
 | /user	     | POST		 | /register      | create user				             |
+|		     | POST		 | /:login        | get login info and log user in       |
+|		     | POST		 | /:logout       | destroy session and log user out     |
 |		     | GET		 | /:id           | get info about user with :id         |
 |		     | PUT		 | /:id        	  | updates user with :id		         |
 | 		     | DELETE	 | /:id           | deletes user with :id		         |

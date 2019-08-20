@@ -26,6 +26,10 @@ def after_request():
 	g.db.close()
 	return response
 
+# sets the default URL with a '/'
+# comes before any other function
+@app.route('/')
+
 
 if __name__ == '__main__':
 	models.initialize()
