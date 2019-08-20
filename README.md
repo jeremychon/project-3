@@ -38,6 +38,7 @@ Pain Point Overflow Max 3000 is a full stack application that allows people to p
 
 ## Routes/Endpoints
 
+**USER**
 | 		     | URL           | HTTP VERB | ACTION	  | DESCRIPTION	  	  				 	 |
 | ---------- |:-------------:| ---------:| ----------:| ------------------------------------:|
 | /user	     |/register      | POST 	 | new/create | creates a new user 					 |
@@ -47,11 +48,14 @@ Pain Point Overflow Max 3000 is a full stack application that allows people to p
 |		     |/:id      	 | PUT 	     | update 	  | updates user with :id				 |
 | 		     |/:id           | DELETE    | delete     | deletes user with :id      			 |
 
+
+**TAGS**
 | 		     | URL           | HTTP VERB | ACTION	  | DESCRIPTION	  	   	   |
 | ---------- |:-------------:| ---------:| ----------:| ----------------------:|
 | /tags	     |/		         | GET  	 | index	  | show all industry tags |
 
 
+**IDEAS**
 | 		     | URL           | HTTP VERB | ACTION	  | DESCRIPTION	  	  				 	 |
 | ---------- |:-------------:| ---------:| ----------:| ------------------------------------:|
 | /ideas	 |/new	         | GET 	 	 | new 		  | show form to create ideas			 |
@@ -61,6 +65,7 @@ Pain Point Overflow Max 3000 is a full stack application that allows people to p
 |		     |/:id      	 | PUT 	     | update 	  | updates idea with :id				 |
 
 
+**SOLUTIONS**
 | 		     | URL           | HTTP VERB | ACTION	  | DESCRIPTION	  	  				 	 |
 | ---------- |:-------------:| ---------:| ----------:| ------------------------------------:|
 | /solutions |/new	         | GET 		 | new 		  | show form to create solution 		 |
