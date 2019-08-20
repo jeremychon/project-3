@@ -1,9 +1,9 @@
 # Project 3 - Pain Point Overflow Max 3000
-## by Sebastian 'Boomer' Portuondo and Dr. Jeremy Chon
+by Sebastian 'Boomer' Portuondo and Dr. Jeremy Chon
 
 ---
 
-### Pain Point Overflow Max 3000 is a full stack application that allows people to post pain points in an industry that need a solution or find existing pain points in an industry that may have a solution. In addition, people can post their own solutions to other people's pain points. 
+Pain Point Overflow Max 3000 is a full stack application that allows people to post pain points in an industry that need a solution or find existing pain points in an industry that may have a solution. In addition, people can post their own solutions to other people's pain points. 
 
 ---
 
@@ -34,6 +34,29 @@
 - As a user, I can view the solution that someone has posted, so that I can see how it was solved, and so that I can potentially utilize the solution for myself.
 - As a user, I want to be able to create my own solutions to ideas, so that people who have the same pain point can have an answer to the problem.
 - As a user, I want to be able to edit my solutions, so that the solution is as accurate as possible.
+
+
+## Routes/Endpoints
+
+| 		     | URL           | HTTP VERB |
+| ---------- |:-------------:| ---------:|
+| /user	     | /register     | POST 	 |
+| 		     | /login        |   GET 	 |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
