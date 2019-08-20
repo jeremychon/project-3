@@ -40,7 +40,7 @@ Pain Point Overflow Max 3000 is a full stack application that allows people to p
 
 #### USER
 | 		     | URL           | HTTP VERB | ACTION	  | DESCRIPTION	  	  				 	 |
-| ---------- |:-------------:| ---------:| ----------:| ------------------------------------:|
+| ---------- |:--------------| :---------| :----------| :------------------------------------|
 | /user	     |/register      | POST 	 | new/create | creates a new user 					 |
 | 		     |/login         | GET   	 | index      | logs user in       					 |
 |		     |/:id      	 | GET 	     | show 	  | shows profile page for user with :id |
@@ -51,13 +51,13 @@ Pain Point Overflow Max 3000 is a full stack application that allows people to p
 
 #### TAGS
 | 		     | URL           | HTTP VERB | ACTION	  | DESCRIPTION	  	   	   |
-| ---------- |:-------------:| ---------:| ----------:| ----------------------:|
+| ---------- |:--------------| :---------| :----------| :----------------------|
 | /tags	     |/		         | GET  	 | index	  | show all industry tags |
 
 
 #### IDEAS
 | 		     | URL           | HTTP VERB | ACTION	  | DESCRIPTION	  	  				 	 |
-| ---------- |:-------------:| ---------:| ----------:| ------------------------------------:|
+| ---------- |:--------------| :---------| :----------| :------------------------------------|
 | /ideas	 |/new	         | GET 	 	 | new 		  | show form to create ideas			 |
 | 		     |/        		 | POST   	 | create     | create idea       					 |
 |		     |/:id      	 | GET 	     | show 	  | shows idea page with :id 			 |
@@ -67,7 +67,7 @@ Pain Point Overflow Max 3000 is a full stack application that allows people to p
 
 #### SOLUTIONS
 | 		     | URL           | HTTP VERB | ACTION	  | DESCRIPTION	  	  				 	 |
-| ---------- |:-------------:| ---------:| ----------:| ------------------------------------:|
+| ---------- |:--------------| :---------| :----------| :------------------------------------|
 | /solutions |/new	         | GET 		 | new 		  | show form to create solution 		 |
 | 		     |/     	     | POST   	 | index      | creat solution     					 |
 |		     |/:id      	 | GET 	     | show 	  | shows solution with :id 			 |
