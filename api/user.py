@@ -50,8 +50,3 @@ def register():
 def logout():
 	logout_user()
 	return redirect('http://localhost:8000/')
-
-
-
-
-
