@@ -78,7 +78,7 @@ def change_solution_rating(id):
 	payload = request.get_json()
 	print(payload, '<--- payload in solution vote')
 	payload['voter_id'] = current_user.id
-	payload['post_id'] = id
+	payload['post_id'] = int(id)
 	print(payload, '<--- payload in solution vote after adding ids')
 
 	try:
