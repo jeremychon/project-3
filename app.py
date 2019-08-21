@@ -1,7 +1,10 @@
 from flask import Flask, g
 from flask_cors import CORS
 from flask_login import LoginManager
+import models
 
+# import blueprints
+from api.user import user
 
 DEBUG = True
 PORT = 8000
@@ -42,7 +45,11 @@ def after_request():
 
 # sets the default URL with a '/'
 # comes before any other route
+# This will be the sign in page
 @app.route('/')
+
+def index():
+	return 'Pain Point'
 
 
 if __name__ == '__main__':

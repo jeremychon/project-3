@@ -36,14 +36,14 @@ class Painpoint_Votes(Model):
 
 
 class Categories(UserMixin, Model):
-	category = varchar(32) not null
+	category = CharField()
 
 	class Meta:
 		database = DATABASE
 
-class Painpoint_Categories(Model)
-	category_id: ForeignKeyField()
-	painpoint_id: ForeignKeyField()
+class Painpoint_Categories(Model):
+	category_id: ForeignKeyField(Categories)
+	painpoint_id: ForeignKeyField(Painpoint)
 
 	class Meta:
 		database = DATABASE
