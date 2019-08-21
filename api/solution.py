@@ -37,14 +37,16 @@ def create_solution():
 @solution.route('/<id>', methods=['PUT'])
 def update_solution(id):
 	payload = request.get_json()
+	print(payload, '<--- payload in update solution route')
 
 	try:
-		query = models.Solution.update(**payload)
+		query = models.Solution.update(**payload).where(models.Solution.id == id)
 		query.execute()
 
 		updated_solution = models.Solution.get_by_id(id)
+		print(model_to_dict(updated_solution), '<--- updated solution after query executes')
 
-		return jsonify(data=updated_solution, status={'code': 200, 'message': 'Updated solution successfully'})
+		return jsonify(data=model_to_dict(updated_solution), status={'code': 200, 'message': 'Updated solution successfully'})
 	except models.DoesNotExist:
 		return jsonify(data={}, status={'code': 401, 'message': 'There was an error updating the solution'})
 

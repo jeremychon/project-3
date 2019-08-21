@@ -51,21 +51,21 @@ Pain Point Overflow Max 3000 is a full stack application that allows people to p
 
 
 #### CATEGORIES
-| 		     | HTTP VERB | URL            | DESCRIPTION	  	   	   	             |
-| ---------- | :---------| :--------------| :------------------------------------|
-| /categories	     | GET		 | /		      | get all industry categories 		         |
-|		     | POST		 | /		      | create new categories				         |
+| 		      | HTTP VERB | URL            | DESCRIPTION	  	   	   	          |
+| ----------- | :---------| :--------------| :------------------------------------|
+| /categories | GET	   	  | /			   |  get all industry categories 		  |
+|		      | POST	  | /			   |  create new categories				  |
 
 
 #### PAIN POINTS
-| 		      | HTTP VERB | URL            | DESCRIPTION	  	  				 	          |
-| ----------  | :---------| :--------------| :------------------------------------------------|
-| /painpoints | GET		  | /              | get all of the newest pain points posted         |
-| 		      | POST	  | /              | create pain point       				          |
-| 		      | GET 	  | /< category_id >    | get all pain points with specific categories           |
-|		      | GET		  | /:id           | get info (solutions) about pain point with :id   |
-|		      | PUT		  | /:id           | updates pain point with :id			          |
-|		      | POST	  | /:id/vote      | adds rating to pain point with :id		          |
+| 		      | HTTP VERB | URL              | DESCRIPTION	  	  				 	          |
+| ----------  | :---------| :----------------| :----------------------------------------------|
+| /painpoints | GET		  | /                | get all of the newest pain points posted       |
+| 		      | POST	  | /                | create pain point       				          |
+| 		      | GET 	  | /< category_id > | get all pain points with specific categories   |
+|		      | GET		  | /:id             | get info (solutions) about pain point with :id |
+|		      | PUT		  | /:id             | updates pain point with :id			          |
+|		      | POST	  | /:id/vote        | adds rating to pain point with :id		      |
 
 
 #### SOLUTIONS
