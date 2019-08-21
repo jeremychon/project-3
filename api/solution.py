@@ -35,7 +35,7 @@ def create_solution():
 
 # ================ UPDATE SOLUTION ================ #
 @solution.route('/<id>', methods=['PUT'])
-def update_solution():
+def update_solution(id):
 	payload = request.get_json()
 
 	try:
@@ -51,16 +51,37 @@ def update_solution():
 
 # ================ DELETE SOLUTION ================ #
 @solution.route('/<id>', methods=['Delete'])
-def delete_solution():
-	query = models.Solution.delete().where(models.Solution.id == id)
-	query.execute()
+def delete_solution(id):
+	try:
+		query = models.Solution.delete().where(models.Solution.id == id)
+		query.execute()
 
-	return jsonify(data='Solution successfully deleted', status={'code': 200, 'message': 'Solution successfully deleted'})
+		return jsonify(data='Solution successfully deleted', status={'code': 200, 'message': 'Solution successfully deleted'})
+	except models.DoesNotExist:
+		return None
 
 
 # ================ CHANGE VOTE ================ #
 @solution.route('/<id>/vote', methods=['POST'])
-def change_solution_rating():
+def change_solution_rating(id):
+	payload = request.get_json()
+	print(payload, '<--- payload in solution vote')
+	payload['voter_id'] = current_user.id
+	payload['post_id'] = id
+	print(payload, '<--- payload in solution vote after adding ids')
+
+	try:
+		vote = models.Solution_Votes.create(**payload)
+		print(vote, '<---- created vote')
+		vote_dict = model_to_dict(vote)
+		print(vote_dict, '<--- vote_dict')
+
+		return jsonify(data=vote_dict, status={'code': 200, 'message': 'Solution vote success'})
+
+	except models.DoesNotExist:
+		return jsonify(data={}, status={'code': 401, 'message': 'There was an error changing the solution rating'})
+
+
 
 
 
