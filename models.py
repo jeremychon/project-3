@@ -5,7 +5,6 @@ import datetime
 DATABASE = SqliteDatabase('painpoint.sqlite')
 
 
-
 class User(UserMixin, Model):
 	full_name = CharField()
 	username = CharField()
@@ -36,14 +35,14 @@ class Painpoint_Votes(Model):
 		database = DATABASE
 
 
-class Categories(UserMixin, Model):
+class Category(UserMixin, Model):
 	category = CharField()
 
 	class Meta:
 		database = DATABASE
 
 class Painpoint_Categories(Model):
-	category_id: ForeignKeyField(Categories)
+	category_id: ForeignKeyField(Category)
 	painpoint_id: ForeignKeyField(Painpoint)
 
 	class Meta:
@@ -73,5 +72,5 @@ class Solution_Votes(Model):
 
 def initialize():
 	DATABASE.connect()
-	DATABASE.create_tables([User, Solution, Solution_Votes], safe=True)
+	DATABASE.create_tables([User, Solution, Solution_Votes, Category, Painpoint, Painpoint_Categories, Painpoint_Votes], safe=True)
 	DATABASE.close()

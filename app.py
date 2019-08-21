@@ -6,6 +6,8 @@ import models
 # import blueprints
 from api.user import user
 from api.solution import solution
+from api.category import category
+
 
 DEBUG = True
 PORT = 8000
@@ -29,9 +31,11 @@ def load_user(userId):
 
 CORS(user, origins=['http://localhost:3000'], supports_credentials=True)
 CORS(solution, origins=['http://localhost:3000'], supports_credentials=True)
+CORS(category, origins=['http://localhost:3000'], supports_credentials=True)
 
 app.register_blueprint(user)
 app.register_blueprint(solution)
+app.register_blueprint(category)
 
 
 @app.before_request
@@ -57,5 +61,3 @@ def index():
 if __name__ == '__main__':
 	models.initialize()
 	app.run(debug=DEBUG, port=PORT)
-
-
