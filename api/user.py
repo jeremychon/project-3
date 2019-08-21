@@ -46,6 +46,27 @@ def register():
 		return jsonify(data=user_dict, status={'code': 200, 'message': 'Register successful'})
 
 # ================ LOGIN ================ #
+@user.route('/login', methods=['POST'])
+def login():
+	payload = request.get_json()
+	print(payload, '<--- payload from login route')
+
+	try:
+		user = models.User.get(models.User.email == payload['email'])
+		print(user, '<--- found user')
+		user_dict = model_to_dict(user)
+		print(user_dict, '<--- user_dict')
+
+		if check_password_hash(user_dict['password'], payload['password']):
+			del user_dict['password']
+			login_user(user)
+
+			return jsonify(data=user_dict, status={'code': 200, 'message': 'User successfully logged in'})
+		else:
+			return jsonify(data={}, status={'code': 401, 'message': 'Incorrect username and/or password'})
+
+	except models.DoesNotExist:
+		return jsonify(data={}, status={'code': 401, 'message': 'Incorrect username and/or password'})
 
 # ================ GET USER INFO ================ #
 
@@ -57,4 +78,5 @@ def register():
 @user.route('/logout', methods=['POST'])
 def logout():
 	logout_user()
-	return redirect('http://localhost:8000/')
+	return 'You are logged out'
+	# return redirect('http://localhost:8000/')
