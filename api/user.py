@@ -15,7 +15,7 @@ from playhouse.shortcuts import model_to_dict
 
 user = Blueprint('user', 'user', url_prefix='/user')
 
-
+# ================ REGISTER ================ #
 @user.route('/register', methods=['POST'])
 def register():
 	# form info
@@ -45,7 +45,7 @@ def register():
 
 		return jsonify(data=user_dict, status={'code': 200, 'message': 'Register successful'})
 
-
+# ================ LOGOUT ================ #
 @user.route('/logout', methods=['POST'])
 def logout():
 	logout_user()

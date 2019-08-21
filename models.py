@@ -29,7 +29,7 @@ class Painpoint(UserMixin, Model):
 class Painpoint_Votes(Model):
 	voter_id = IntegerField()
 	post_id = IntegerField()
-	date = DateTimeField(datetime.datetime.now)
+	date = DateTimeField(default=datetime.datetime.now)
 
 	class Meta:
 		database = DATABASE
@@ -63,7 +63,7 @@ class Solution(Model):
 class Solution_Votes(Model):
 	voter_id = IntegerField()
 	post_id = IntegerField()
-	date = DateTimeField(datetime.datetime.now)
+	date = DateTimeField(default=datetime.datetime.now)
 
 	class Meta:
 		database = DATABASE
