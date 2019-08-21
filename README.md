@@ -72,7 +72,6 @@ Pain Point Overflow Max 3000 is a full stack application that allows people to p
 | 		     | HTTP VERB | URL            | DESCRIPTION	  	  				 	 |
 | ---------- | :---------| :--------------| :------------------------------------|
 | /solution  | POST		 | /  	     	  | create solution						 |
-|		     | GET		 | /:id      	  | get info about solution with :id     |
 |		     | PUT		 | /:id      	  | updates solution with :id			 |
 |		     | POST		 | /:id/vote   	  | adds rating to solution with :id	 |
 

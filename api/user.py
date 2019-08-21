@@ -45,6 +45,14 @@ def register():
 
 		return jsonify(data=user_dict, status={'code': 200, 'message': 'Register successful'})
 
+# ================ LOGIN ================ #
+
+# ================ GET USER INFO ================ #
+
+# ================ DELETE USER ================ #
+
+# ================ UPDATE USER ================ #
+
 # ================ LOGOUT ================ #
 @user.route('/logout', methods=['POST'])
 def logout():
