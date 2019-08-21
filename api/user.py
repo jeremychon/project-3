@@ -15,6 +15,18 @@ from playhouse.shortcuts import model_to_dict
 
 user = Blueprint('user', 'user', url_prefix='/user')
 
+# ================ SHOW ALL USERS ================ #
+@user.route('/', methods=['GET'])
+def show_all_users():
+	try:
+		all_users = [model_to_dict(user) for user in models.User.select()]
+
+		return jsonify(data=all_users, status={'code': 200, 'message': 'All users are shown'})
+	except models.DoesNotExist:
+		return jsonify(data={}, status={'code': 401, 'message': 'There was an error getting the users'})
+
+
+
 # ================ REGISTER ================ #
 @user.route('/register', methods=['POST'])
 def register():
@@ -71,6 +83,12 @@ def login():
 # ================ GET USER INFO ================ #
 
 # ================ DELETE USER ================ #
+@user.route('/<id>', methods=['Delete'])
+def delete_user():
+	query = models.User.delete().where(models.User.id == id)
+	query.execute()
+
+	return jsonify(data='User account deleted', status={'code': 200, 'message': 'User has been deleted'})
 
 # ================ UPDATE USER ================ #
 
