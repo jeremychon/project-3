@@ -16,10 +16,10 @@ from playhouse.shortcuts import model_to_dict
 user = Blueprint('user', 'user', url_prefix='/user')
 
 
-@user.route('/register', method=['POST'])
+@user.route('/register', methods=['POST'])
 def register():
 	# form info
-	payload = request.form.to_dict()
+	payload = request.get_json()
 	print(payload, '<--- payload in user register route')
 
 	payload['email'].lower()
@@ -29,7 +29,7 @@ def register():
 
 		return jsonify(data={}, status={'code': 401, 'message': 'A user with that username and/or email already exists'})
 
-	except models.DoesNotExist():
+	except models.DoesNotExist:
 
 		payload['password'] = generate_password_hash(payload['password'])
 
@@ -46,7 +46,7 @@ def register():
 		return jsonify(data=user_dict, status={'code': 200, 'message': 'Register successful'})
 
 
-@user.route('/logout', method=['POST'])
+@user.route('/logout', methods=['POST'])
 def logout():
 	logout_user()
 	return redirect('http://localhost:8000/')

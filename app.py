@@ -38,7 +38,7 @@ def before_request():
 	g.db.connect()
 
 @app.after_request
-def after_request():
+def after_request(response):
 	### Close the database after each request ###
 	g.db.close()
 	return response
@@ -47,7 +47,6 @@ def after_request():
 # comes before any other route
 # This will be the sign in page
 @app.route('/')
-
 def index():
 	return 'Pain Point'
 
@@ -55,3 +54,5 @@ def index():
 if __name__ == '__main__':
 	models.initialize()
 	app.run(debug=DEBUG, port=PORT)
+
+
