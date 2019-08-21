@@ -7,11 +7,25 @@ DEBUG = True
 PORT = 8000
 
 # sets up ability to set up the session
-login_manager = LoginManager
+login_manager = LoginManager()
 
 # Initializes an instance of the Flask class (aka starts the website)
 app = Flask(__name__, static_url_path='', static_folder='static')
 
+
+app.secret_key = 'FJkjewankl4@VDSAj'
+login_manager.init_app(app)
+
+@login_manager.user_loader
+def load_user(userId):
+	try:
+		return models.User.get(models.User.id == userId)
+	except models.DoesNotExist:
+		return None
+
+CORS(user, origins=['http://localhost:3000'], supports_credentials=True)
+
+app.register_blueprint(user)
 
 
 @app.before_request
@@ -27,7 +41,7 @@ def after_request():
 	return response
 
 # sets the default URL with a '/'
-# comes before any other function
+# comes before any other route
 @app.route('/')
 
 
