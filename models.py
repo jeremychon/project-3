@@ -1,4 +1,4 @@
-from peewee import * 
+from peewee import *
 from flask_login import UserMixin
 import datetime
 
@@ -16,6 +16,37 @@ class User(UserMixin, Model):
 	class Meta:
 		database = DATABASE
 
+class Painpoint(UserMixin, Model):
+	owner_id = IntegerField()
+	date = DateTimeField(default=datetime.datetime.now)
+	head = CharField()
+	body = TextField()
+	attachment = CharField()
+
+	class Meta:
+		database = DATABASE
+
+class Painpoint_Votes(Model):
+	voter_id = IntegerField()
+	post_id = IntegerField()
+	date = DateTimeField(datetime.datetime.now)
+
+	class Meta:
+		database = DATABASE
+
+
+class Categories(UserMixin, Model):
+	category = varchar(32) not null
+
+	class Meta:
+		database = DATABASE
+
+class Painpoint_Categories(Model)
+	category_id: ForeignKeyField()
+	painpoint_id: ForeignKeyField()
+
+	class Meta:
+		database = DATABASE
 
 class Solution(Model):
 	idea_id = IntegerField()
