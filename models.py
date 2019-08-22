@@ -32,9 +32,9 @@ class Category(UserMixin, BaseModel):
 	category = CharField()
 
 
-class Painpoint_Categories(BaseModel):
-	category: ForeignKeyField(Category)
-	painpoint: ForeignKeyField(Painpoint)
+class Painpoint_Category(BaseModel):
+	category = ForeignKeyField(Category)
+	painpoint = ForeignKeyField(Painpoint)
 
 
 class Solution(BaseModel):
@@ -56,5 +56,5 @@ class Solution_Votes(BaseModel):
 
 def initialize():
 	Painpoints_API_DB.connect()
-	Painpoints_API_DB.create_tables([User, Solution, Solution_Votes, Category, Painpoint, Painpoint_Categories, Painpoint_Votes], safe = True)
+	Painpoints_API_DB.create_tables([User, Solution, Solution_Votes, Category, Painpoint, Painpoint_Category, Painpoint_Votes], safe = True)
 	Painpoints_API_DB.close()

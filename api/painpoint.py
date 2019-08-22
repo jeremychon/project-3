@@ -6,23 +6,56 @@ from playhouse.shortcuts import model_to_dict
 
 painpoint = Blueprint('painpoint', 'painpoint', url_prefix="/painpoints")
 
+# # ================ JOIN PAINPOINTS AND categories================ #
+# @painpoint.route('/pp_cat_join/<painpoint_id>', methods = ['POST']):
+#     painpoint_categories = (Category
+#     .select()
+#     .join(Painpoint_Category)
+#     .join(Painpoint)
+#      .where(Painpoint.id == painpoint_id))
+#
+# for category in painpoint_categories:
+#     print(category.category)
 
-# ================ SHOW ALL PAINPOINTS ================ #
+# ================ SHOW ALL PAINPOINTS (PAINPOINT INDEX)================ #
 @painpoint.route('/', methods=["GET"])
 def get_all_painpoints():
-    print('----------------------------------------------------------------------')
     try:
         painpoints = models.Painpoint.select()
-        for p in painpoints:
-            print(model_to_dict(p), '<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<,')
+        # categories = models.Category.select()
+        #
+        # pp_dictionaries = [model_to_dict(painpoint) for painpoint in painpoints]
+        # category_dictionaries = [model_to_dict(category) for category in categories]
+        #
+        # for i in range(0, 20):
 
-        pp = [model_to_dict(p) for p in painpoints]
+        # SELECT * FROM painpoints ORDER BY date DESC LIMIT 20;
+
 
         return jsonify(data=pp, status = {'code': 401, 'message': 'Error getting all painpoints'})
         # return 'check terminal'
 
     except models.DoesNotExist:
         return jsonify(data = {}, status = {'code': 401, 'message': 'Error getting all painpoints'})
+
+
+# i hate the rain
+#     weather
+#     wet
+#     rain
+#
+# i like chocolate but i can't eat it
+#     dietary restriction
+#     vegan
+#
+# i don't eat meat when it's raining
+#     dietary restriction
+#     rain
+#     vegan
+
+
+
+
 
 
 # ================ CREATE PAINPOINT ================ #

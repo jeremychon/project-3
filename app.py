@@ -8,6 +8,7 @@ from api.user import user
 from api.solution import solution
 from api.category import category
 from api.painpoint import painpoint
+from api.painpoint_category_join import pp
 
 
 DEBUG = True
@@ -34,11 +35,13 @@ CORS(user, origins=['http://localhost:3000'], supports_credentials=True)
 CORS(solution, origins=['http://localhost:3000'], supports_credentials=True)
 CORS(category, origins=['http://localhost:3000'], supports_credentials=True)
 CORS(painpoint, origins=['http://localhost:3000'], supports_credentials=True)
+CORS(pp, origins=['http://localhost:3000'], supports_credentials=True)
 
 app.register_blueprint(user)
 app.register_blueprint(solution)
 app.register_blueprint(category)
 app.register_blueprint(painpoint)
+app.register_blueprint(pp)
 
 
 @app.before_request
