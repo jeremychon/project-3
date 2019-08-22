@@ -81,10 +81,23 @@ def login():
 		return jsonify(data={}, status={'code': 401, 'message': 'Incorrect username and/or password'})
 
 # ================ GET USER INFO ================ #
+@user.route('/<id>', methods=['GET'])
+def get_user(id):
+	try:
+		user = models.User.get(models.User.id == id)
+		print(user, '<--- user')
+		user_dict = model_to_dict(user)
+		print(user_dict, '<--- user_dict')
+
+		return jsonify(data=user_dict, status={'code': 200, 'message': 'User found'})
+
+	except models.DoesNotExist:
+		return jsonify(data={}, status={'code': 401, 'message': 'There was an error finding the user'})
+
 
 # ================ DELETE USER ================ #
 @user.route('/<id>', methods=['Delete'])
-def delete_user():
+def delete_user(id):
 	query = models.User.delete().where(models.User.id == id)
 	query.execute()
 
