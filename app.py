@@ -7,6 +7,7 @@ import models
 from api.user import user
 from api.solution import solution
 from api.category import category
+from api.painpoint import painpoint
 
 
 DEBUG = True
@@ -32,10 +33,12 @@ def load_user(userId):
 CORS(user, origins=['http://localhost:3000'], supports_credentials=True)
 CORS(solution, origins=['http://localhost:3000'], supports_credentials=True)
 CORS(category, origins=['http://localhost:3000'], supports_credentials=True)
+CORS(painpoint, origins=['http://localhost:3000'], supports_credentials=True)
 
 app.register_blueprint(user)
 app.register_blueprint(solution)
 app.register_blueprint(category)
+app.register_blueprint(painpoint)
 
 
 @app.before_request
