@@ -7,7 +7,7 @@ from playhouse.shortcuts import model_to_dict
 painpoint = Blueprint('painpoint', 'painpoint', url_prefix="/painpoints")
 
 
-# ================ SHOW ALL PAINPOINTS ================ #
+# ================ SHOW ALL PAINPOINTS (INDEX) ================ #
 @painpoint.route('/', methods=["GET"])
 def get_all_painpoints():
     print('----------------------------------------------------------------------')
@@ -21,7 +21,7 @@ def get_all_painpoints():
         pp = [model_to_dict(p) for p in painpoints]
 
         return jsonify(data=pp, status = {'code': 401, 'message': 'Error getting all painpoints'})
-        # return 'check terminal'
+
 
     except models.DoesNotExist:
         return jsonify(data = {}, status = {'code': 401, 'message': 'Error getting all painpoints'})
