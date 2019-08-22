@@ -89,6 +89,12 @@ def get_user(id):
 		user_dict = model_to_dict(user)
 		print(user_dict, '<--- user_dict')
 
+		all_painpoints = [model_to_dict(painpoint) for painpoint in models.Painpoint.select().where(models.Painpoint.owner_id == id)]
+		user['all_painpoints'] = all_painpoints
+
+		all_solutions = [model_to_dict(solution) for solution in models.Solution.select().where(models.Solution.owner_id == id)]
+		user['all_solutions'] = all_solutions
+
 		return jsonify(data=user_dict, status={'code': 200, 'message': 'User found'})
 
 	except models.DoesNotExist:
@@ -104,6 +110,22 @@ def delete_user(id):
 	return jsonify(data='User account deleted', status={'code': 200, 'message': 'User has been deleted'})
 
 # ================ UPDATE USER ================ #
+@user.route('/<id>', methods=['PUT'])
+def update_user(id):
+	payload = request.get_json()
+
+	try:
+		query = models.User.update(**payload).where(models.User.id == id)
+		query.execute()
+
+		updated_user = models.User.get_by_id(id)
+
+		return jsonify(data=model_to_dict(updated_user), status={'code': 200, 'message': 'User has been updated'})
+
+	except models.DoesNotExist:
+		return jsonify(data={}, status={'code': 401, 'message': 'There was an error updating the user'})
+
+
 
 # ================ LOGOUT ================ #
 @user.route('/logout', methods=['POST'])
