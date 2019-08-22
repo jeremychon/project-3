@@ -7,21 +7,34 @@ from playhouse.shortcuts import model_to_dict
 painpoint = Blueprint('painpoint', 'painpoint', url_prefix="/painpoints")
 
 
-# # ================ SHOW ALL PAINPOINTS ================ #
-# @api.route('/', methods=["GET"])
-# def get_all_painpoints():
-#     try:
-#         painpoints = [model_to_dict(painpoint) for painpoint in models.Painpoint.select()]
-#
-#     except models.DoesNotExist:
-#         return jsonify(data = {}, status = {'code': 401, 'message': 'Error getting all painpoints'})
+# ================ SHOW ALL PAINPOINTS ================ #
+@painpoint.route('/', methods=["GET"])
+def get_all_painpoints():
+    print('----------------------------------------------------------------------')
+    try:
+        painpoints = models.Painpoint.select()
+        for p in painpoints:
+            print(model_to_dict(p), '<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<,')
+
+        # painpoints_dict = model_to_dict(painpoints)
+
+        pp = [model_to_dict(p) for p in painpoints]
+
+        return jsonify(data=pp, status = {'code': 401, 'message': 'Error getting all painpoints'})
+        # return 'check terminal'
+
+    except models.DoesNotExist:
+        return jsonify(data = {}, status = {'code': 401, 'message': 'Error getting all painpoints'})
+
 
 # ================ CREATE PAINPOINT ================ #
 @painpoint.route('/', methods=['POST'])
 def create_painpoint():
     print('-----------Hitting create painpoint route-------------')
     payload = request.get_json()
-    payload['owner'] = current_user.id
+    print('here is payload')
+    print(payload)
+    # payload['owner'] = current_user.id
 
     painpoint = models.Painpoint.create(**payload)
 

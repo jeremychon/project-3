@@ -2,52 +2,42 @@ from peewee import *
 from flask_login import UserMixin
 import datetime
 
-DATABASE = SqliteDatabase('painpoint.sqlite')
+Painpoints_API_DB = SqliteDatabase('painpoint.sqlite')
 
+class BaseModel(Model):
+    class Meta:
+        database = Painpoints_API_DB
 
-class User(UserMixin, Model):
+class User(UserMixin, BaseModel):
 	full_name = CharField()
 	username = CharField()
 	email = CharField()
 	password = CharField()
 
-	class Meta:
-		database = DATABASE
 
-class Painpoint(UserMixin, Model):
+class Painpoint(UserMixin, BaseModel):
 	owner = ForeignKeyField(User)
 	date = DateTimeField(default=datetime.datetime.now)
 	head = CharField()
 	body = TextField()
 	attachment = CharField()
 
-	class Meta:
-		database = DATABASE
-
-class Painpoint_Votes(Model):
+class Painpoint_Votes(BaseModel):
 	voter = IntegerField()
 	post = IntegerField()
 	vote = SmallIntegerField()
 	date = DateTimeField(default=datetime.datetime.now)
 
-	class Meta:
-		database = DATABASE
-
-
-class Category(UserMixin, Model):
+class Category(UserMixin, BaseModel):
 	category = CharField()
 
-	class Meta:
-		database = DATABASE
 
-class Painpoint_Categories(Model):
+class Painpoint_Categories(BaseModel):
 	category: ForeignKeyField(Category)
 	painpoint: ForeignKeyField(Painpoint)
 
-	class Meta:
-		database = DATABASE
 
-class Solution(Model):
+class Solution(BaseModel):
 	painpoint = ForeignKeyField(Painpoint)
 	owner = ForeignKeyField(User)
 	date = DateTimeField(default=datetime.datetime.now)
@@ -55,21 +45,16 @@ class Solution(Model):
 	body = TextField()
 	attachment = CharField()
 
-	class Meta:
-		database = DATABASE
 
-
-class Solution_Votes(Model):
+class Solution_Votes(BaseModel):
 	voter = ForeignKeyField(User)
 	post = ForeignKeyField(Painpoint)
 	vote = SmallIntegerField()
 	date = DateTimeField(default=datetime.datetime.now)
 
-	class Meta:
-		database = DATABASE
 
 
 def initialize():
-	DATABASE.connect()
-	DATABASE.create_tables([User, Solution, Solution_Votes, Category, Painpoint, Painpoint_Categories, Painpoint_Votes], safe=True)
-	DATABASE.close()
+	Painpoints_API_DB.connect()
+	Painpoints_API_DB.create_tables([User, Solution, Solution_Votes, Category, Painpoint, Painpoint_Categories, Painpoint_Votes], safe = True)
+	Painpoints_API_DB.close()
