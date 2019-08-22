@@ -21,13 +21,13 @@ painpoint = Blueprint('painpoint', 'painpoint', url_prefix="/painpoints")
 def create_painpoint():
     print('-----------Hitting create painpoint route-------------')
     payload = request.get_json()
-    payload['owner_id'] = 1
+    payload['owner'] = current_user.id
 
     painpoint = models.Painpoint.create(**payload)
 
     painpoint_dict = model_to_dict(painpoint)
 
-    return jsonify(data = painpoint_dict, status = {'code': 201, 'message': 'successfully created painpoint'})
+    return jsonify(data=painpoint_dict, status={'code': 201, 'message': 'successfully created painpoint'})
 
 
 # ================ SHOW PAINPOINT ================ #

@@ -124,12 +124,10 @@ def get_user(id):
 		print(user_dict, '<--- user_dict')
 
 		all_painpoints = [model_to_dict(painpoint) for painpoint in models.Painpoint.select().where(models.Painpoint.owner_id == id)]
-		# user['all_painpoints'] = all_painpoints
 
 		all_solutions = [model_to_dict(solution) for solution in models.Solution.select().where(models.Solution.owner_id == id)]
-		# user['all_solutions'] = all_solutions
 
-		return jsonify(data={'pp': all_painpoints, 'sol': all_solutions, 'user': user_dict}, status={'code': 200, 'message': 'User found'})
+		return jsonify(data={'painpoints': all_painpoints, 'solutions': all_solutions, 'user': user_dict}, status={'code': 200, 'message': 'User found'})
 
 	except models.DoesNotExist:
 		return jsonify(data={}, status={'code': 401, 'message': 'There was an error finding the user'})

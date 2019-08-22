@@ -10,7 +10,6 @@ class User(UserMixin, Model):
 	username = CharField()
 	email = CharField()
 	password = CharField()
-	# karma = CharField()
 
 	class Meta:
 		database = DATABASE
