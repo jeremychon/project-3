@@ -16,8 +16,6 @@ def get_all_painpoints():
         for p in painpoints:
             print(model_to_dict(p), '<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<,')
 
-        # painpoints_dict = model_to_dict(painpoints)
-
         pp = [model_to_dict(p) for p in painpoints]
 
         return jsonify(data=pp, status = {'code': 401, 'message': 'Error getting all painpoints'})
