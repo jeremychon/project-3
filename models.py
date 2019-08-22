@@ -25,8 +25,8 @@ class Painpoint(UserMixin, Model):
 		database = DATABASE
 
 class Painpoint_Votes(Model):
-	voter_id = IntegerField()
-	post_id = IntegerField()
+	voter = IntegerField()
+	post = IntegerField()
 	vote = SmallIntegerField()
 	date = DateTimeField(default=datetime.datetime.now)
 
@@ -41,8 +41,8 @@ class Category(UserMixin, Model):
 		database = DATABASE
 
 class Painpoint_Categories(Model):
-	category_id: ForeignKeyField(Category)
-	painpoint_id: ForeignKeyField(Painpoint)
+	category: ForeignKeyField(Category)
+	painpoint: ForeignKeyField(Painpoint)
 
 	class Meta:
 		database = DATABASE

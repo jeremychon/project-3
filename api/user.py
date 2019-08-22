@@ -123,9 +123,9 @@ def get_user(id):
 		user_dict = model_to_dict(user)
 		print(user_dict, '<--- user_dict')
 
-		all_painpoints = [model_to_dict(painpoint) for painpoint in models.Painpoint.select().where(models.Painpoint.owner_id == id)]
+		all_painpoints = [model_to_dict(painpoint) for painpoint in models.Painpoint.select().where(models.Painpoint.owner == id)]
 
-		all_solutions = [model_to_dict(solution) for solution in models.Solution.select().where(models.Solution.owner_id == id)]
+		all_solutions = [model_to_dict(solution) for solution in models.Solution.select().where(models.Solution.owner == id)]
 
 		return jsonify(data={'painpoints': all_painpoints, 'solutions': all_solutions, 'user': user_dict}, status={'code': 200, 'message': 'User found'})
 
@@ -165,7 +165,3 @@ def logout():
 	logout_user()
 	return 'You are logged out'
 	# return redirect('http://localhost:8000/')
-
-
-
-

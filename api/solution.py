@@ -25,7 +25,7 @@ def create_solution():
 
 	print(current_user, '<--- current_user')
 	payload = request.get_json()
-	payload['owner_id'] = current_user.id
+	payload['owner'] = current_user.id
 	print(payload, '<--- payload in solution create route')
 
 	try:
@@ -77,8 +77,8 @@ def delete_solution(id):
 def change_solution_rating(id):
 	payload = request.get_json()
 	print(payload, '<--- payload in solution vote')
-	payload['voter_id'] = current_user.id
-	payload['post_id'] = int(id)
+	payload['voter'] = current_user.id
+	payload['post'] = int(id)
 	print(payload, '<--- payload in solution vote after adding ids')
 
 	try:
@@ -91,16 +91,3 @@ def change_solution_rating(id):
 
 	except models.DoesNotExist:
 		return jsonify(data={}, status={'code': 401, 'message': 'There was an error changing the solution rating'})
-
-
-
-
-
-
-
-
-
-
-
-
-

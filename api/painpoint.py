@@ -62,11 +62,11 @@ def delete_painpoint(id):
 
 
 # # ================ PAINPOINT VOTE ================ #
-# @painpoint.route('/<voter_id>/vote', methods=['POST'])
-# def change_painpoint_vote(voter_id):
+# @painpoint.route('/<voter>/vote', methods=['POST'])
+# def change_painpoint_vote(voter):
 # 	payload = request.get_json()
-#     payload['voter_id'] = current_user.voter_id
-#     payload['post_id'] = int(voter_id)
+#     payload['voter'] = current_user.voter
+#     payload['post'] = int(voter)
 #
 # 		vote = models.Painpoint_Votes.create(**payload)
 # 		vote_dict = model_to_dict(vote)
