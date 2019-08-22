@@ -117,6 +117,7 @@ def login():
 @user.route('/<id>', methods=['GET'])
 def get_user(id):
 	try:
+
 		user = models.User.get(models.User.id == id)
 		print(user, '<--- user')
 		user_dict = model_to_dict(user)
@@ -128,7 +129,7 @@ def get_user(id):
 		all_solutions = [model_to_dict(solution) for solution in models.Solution.select().where(models.Solution.owner_id == id)]
 		# user['all_solutions'] = all_solutions
 
-		return jsonify(data=user_dict, status={'code': 200, 'message': 'User found'})
+		return jsonify(data={'pp': all_painpoints, 'sol': all_solutions, 'user': user_dict}, status={'code': 200, 'message': 'User found'})
 
 	except models.DoesNotExist:
 		return jsonify(data={}, status={'code': 401, 'message': 'There was an error finding the user'})
@@ -166,3 +167,7 @@ def logout():
 	logout_user()
 	return 'You are logged out'
 	# return redirect('http://localhost:8000/')
+
+
+
+

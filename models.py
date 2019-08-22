@@ -10,13 +10,13 @@ class User(UserMixin, Model):
 	username = CharField()
 	email = CharField()
 	password = CharField()
-	karma = CharField()
+	# karma = CharField()
 
 	class Meta:
 		database = DATABASE
 
 class Painpoint(UserMixin, Model):
-	owner_id = IntegerField()
+	owner = ForeignKeyField(User)
 	date = DateTimeField(default=datetime.datetime.now)
 	head = CharField()
 	body = TextField()
@@ -49,8 +49,8 @@ class Painpoint_Categories(Model):
 		database = DATABASE
 
 class Solution(Model):
-	painpoint_id = IntegerField()
-	owner_id = IntegerField()
+	painpoint = ForeignKeyField(Painpoint)
+	owner = ForeignKeyField(User)
 	date = DateTimeField(default=datetime.datetime.now)
 	head = CharField()
 	body = TextField()
@@ -61,8 +61,8 @@ class Solution(Model):
 
 
 class Solution_Votes(Model):
-	voter_id = IntegerField()
-	post_id = IntegerField()
+	voter = ForeignKeyField(User)
+	post = ForeignKeyField(Painpoint)
 	vote = SmallIntegerField()
 	date = DateTimeField(default=datetime.datetime.now)
 
