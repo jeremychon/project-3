@@ -33,27 +33,10 @@ def get_all_painpoints():
 
 
         return jsonify(data=pp, status = {'code': 401, 'message': 'Error getting all painpoints'})
-        # return 'check terminal'
+
 
     except models.DoesNotExist:
         return jsonify(data = {}, status = {'code': 401, 'message': 'Error getting all painpoints'})
-
-
-# i hate the rain
-#     weather
-#     wet
-#     rain
-#
-# i like chocolate but i can't eat it
-#     dietary restriction
-#     vegan
-#
-# i don't eat meat when it's raining
-#     dietary restriction
-#     rain
-#     vegan
-
-
 
 
 
