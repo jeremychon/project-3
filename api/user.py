@@ -43,6 +43,7 @@ user = Blueprint('user', 'user', url_prefix='/user')
 @user.route('/register', methods=['POST'])
 def register():
 	# pay_file = request.files
+	print(request.get_json(), '<---- request in register api')
 
 	# form info
 	payload = request.get_json()
@@ -75,7 +76,7 @@ def register():
 
 		del user_dict['password']
 
-		return jsonify(data=user_dict, status={'code': 200, 'message': 'Register successful'})
+		return jsonify(data=user_dict, status={'code': 200, 'message': 'Success'})
 
 
 # ================ SHOW ALL USERS ================ #
