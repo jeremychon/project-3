@@ -13,7 +13,7 @@ painpoint = Blueprint('painpoint', 'painpoint', url_prefix="/painpoints")
 #     .join(Painpoint_Category)
 #     .join(Painpoint)
 #      .where(Painpoint.id == painpoint_id))
-#
+#ß
 # for category in painpoint_categories:
 #     print(category.category)
 
@@ -22,18 +22,18 @@ painpoint = Blueprint('painpoint', 'painpoint', url_prefix="/painpoints")
 def get_all_painpoints():
     try:
         painpoint_categories = (models.Painpoint_Category
-            .select(models.Painpoint_Category, models.Painpoint, models.Category)
-            .join(models.Category)
-            .switch(models.Painpoint_Category)
-            .join(models.Painpoint)
-            .where(models.Painpoint_Category.category == 1))
+         .select(models.Painpoint_Category, models.Painpoint, models.Category)
+         .join(models.Category)
+         .switch(models.Painpoint_Category)
+         .join(models.Painpoint)
+         .where(models.Painpoint_Category.painpoint == 2))
 
         them = [model_to_dict(thing) for thing in painpoint_categories]
         print(them)
 
-        return jsonify(data=them, status = {'code': 201, 'message': 'Success'})
+        return jsonify(data=them, status = {'code': 401, 'message': 'Error getting all painpoints'})
 
-
+        # return 'check terminal'
     except models.DoesNotExist:
         return jsonify(data = {}, status = {'code': 401, 'message': 'Error getting all painpoints'})
 
@@ -43,7 +43,6 @@ def get_all_painpoints():
 # ================ CREATE PAINPOINT ================ #
 @painpoint.route('/', methods=['POST'])
 def create_painpoint():
-    print('-----------Hitting create painpoint route-------------')
     payload = request.get_json()
     print('here is payload')
     payload['owner'] = current_user.id
