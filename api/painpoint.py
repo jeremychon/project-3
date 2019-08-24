@@ -57,8 +57,6 @@ def get_all_painpoints():
             print(returned_list, '<-- returned_list ::::::::::::::::::::::::::::::::::::::::::::::::::::')
             print(ppc_list, '<-- PPC list :::::::::::::::::::::::::::::::::::::::::::::::::::::')
         return jsonify(data=ppc_list, status = {'code': 200, 'message': 'it should be working'})
-
-
         # return 'check terminal'
     except models.DoesNotExist:
         return jsonify(data = {}, status = {'code': 401, 'message': 'Error getting all painpoints'})

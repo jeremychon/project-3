@@ -43,10 +43,11 @@ user = Blueprint('user', 'user', url_prefix='/user')
 @user.route('/register', methods=['POST'])
 def register():
 	# pay_file = request.files
-	print(request.get_json(), '<---- request in register api')
+	# print(request.get_json(), '<---- request in register api')
 
 	# form info
-	payload = request.get_json()
+	# payload = request.get_json()
+	payload = request.form.to_dict()
 	print(payload, '<--- payload in user register route')
 	# dict_file = pay_file.to_dict()
 	# print(dict_file, '<--- dict_file')
