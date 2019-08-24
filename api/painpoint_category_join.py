@@ -14,4 +14,4 @@ def pp_cat_join():
 
     pp_cat_dict = model_to_dict(pp_cat)
 
-    return jsonify(data = pp_cat_dict, status={'code': 201, 'message': 'successfully created painpoint'})
+    return jsonify(data = pp_cat_dict, status={'code': 201, 'message': 'successfully created painpoint'}) 
