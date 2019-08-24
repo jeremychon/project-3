@@ -14,7 +14,7 @@ def all_solutions():
 		all_solutions = [model_to_dict(solution) for solution in models.Solution.select()]
 		return jsonify(data=all_solutions, status={'code': 200, 'message': 'Showing all solutions'})
 	except models.DoesNotExist:
-		return jsonify(data={}, status={'code': 200, 'message': 'There was an error to show all the solutions'})
+		return jsonify(data={}, status={'code': 401, 'message': 'There was an error to show all the solutions'})
 
 
 # ================ CREATE SOLUTION ================ #
@@ -24,7 +24,7 @@ def create_solution():
 	# get the idea that is associated with the solution
 
 	print(current_user, '<--- current_user')
-	payload = request.get_json()
+	payload = request.form.to_dict()
 	payload['owner'] = current_user.id
 	print(payload, '<--- payload in solution create route')
 

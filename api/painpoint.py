@@ -26,12 +26,12 @@ def get_all_painpoints():
          .join(models.Category)
          .switch(models.Painpoint_Category)
          .join(models.Painpoint)
-         .where(models.Painpoint_Category.painpoint == 2))
+         )
 
         them = [model_to_dict(thing) for thing in painpoint_categories]
         print(them)
 
-        return jsonify(data=them, status = {'code': 401, 'message': 'Error getting all painpoints'})
+        return jsonify(data=them, status = {'code': 200, 'message': 'Got all painpoints'})
 
         # return 'check terminal'
     except models.DoesNotExist:
