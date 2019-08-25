@@ -14,7 +14,6 @@ class User(UserMixin, BaseModel):
 	email = CharField()
 	password = CharField()
 
-
 class Painpoint(UserMixin, BaseModel):
 	owner = ForeignKeyField(User)
 	date = DateTimeField(default=datetime.datetime.now)

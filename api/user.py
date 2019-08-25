@@ -48,7 +48,7 @@ def register():
 	# form info
 	# payload = request.get_json()
 	payload = request.form.to_dict()
-	print(payload, '<--- payload in user register route')
+	# print(payload, '<--- payload in user register route')
 	# dict_file = pay_file.to_dict()
 	# print(dict_file, '<--- dict_file')
 

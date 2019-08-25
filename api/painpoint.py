@@ -20,16 +20,15 @@ def get_all_painpoints():
          .join(models.Painpoint)
          )
 
-        print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!AFTER QUERY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
 
         returned_list = [model_to_dict(pp_and_c) for pp_and_c in painpoint_categories]
+        #
+        # print("------")
+        # print("EARLY RETURNED LIST")
+        # print("------")
+        # print(returned_list)
 
-        print("------")
-        print("EARLY RETURNED LIST")
-        print("------")
-        print(returned_list)
-
-        # return jsonify(data=returned_list)
+        # return jsonify(data=returned_list, status = {'code': 200, 'message': 'it should be working'})
 
         ppc_list = []
         ids_so_far = []
@@ -38,24 +37,22 @@ def get_all_painpoints():
         #for each dictionary in the returned list:
         for dictionary in returned_list:
             # grab the id of the painpoint dict in that dictionary
+            #if the painpoint has already been added to the ppc_list and its id is in the ids_so_far list,
             painpoint_id = dictionary['painpoint']['id']
 
-            #if the painpoint has already been added to the ppc_list and its id is in the ids_so_far list,
             if painpoint_id in ids_so_far:
                 #find the index of the painpoint in the ppc_list
-                index_in_ppc_list = ppc_list.index(painpoint_id)
                 #then, append the category from the main dictionary to the 'categories' list in the ppc_list
+                index_in_ppc_list = next((index for (index, dict) in enumerate(ppc_list) if dict['painpoint'] == dictionary['painpoint']), None)
                 ppc_list[index_in_ppc_list]['categories'].append(dictionary['category'])
 
-            #if the painpoint has not already been added to the ppc_list
             else:
-                #ad the painpoint's id to the ids so far list
-                ids_so_far.append(painpoint_id)
+                #if the painpoint has not already been added to the ppc_list
+                #add the painpoint's id to the ids so far list
                 # and then add the painpoint and its associated category to the ppc list
+                ids_so_far.append(painpoint_id)
                 ppc_list.append({'painpoint': dictionary['painpoint'], 'categories': [dictionary['category']]})
 
-            print(returned_list, '<-- returned_list ::::::::::::::::::::::::::::::::::::::::::::::::::::')
-            print(ppc_list, '<-- PPC list :::::::::::::::::::::::::::::::::::::::::::::::::::::')
         return jsonify(data=ppc_list, status = {'code': 200, 'message': 'it should be working'})
         # return 'check terminal'
     except models.DoesNotExist:
@@ -67,10 +64,9 @@ def get_all_painpoints():
 # ================ CREATE PAINPOINT ================ #
 @painpoint.route('/', methods=['POST'])
 def create_painpoint():
+    print('-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------')
     payload = request.get_json()
-    print('here is payload')
     payload['owner'] = current_user.id
-    print(payload)
 
     painpoint = models.Painpoint.create(**payload)
 
