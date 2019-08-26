@@ -130,6 +130,7 @@ def get_user(id):
 
 		all_solutions = [model_to_dict(solution) for solution in models.Solution.select().where(models.Solution.owner == id)]
 
+
 		return jsonify(data={'painpoints': all_painpoints, 'solutions': all_solutions, 'user': user_dict}, status={'code': 200, 'message': 'User found'})
 
 	except models.DoesNotExist:
