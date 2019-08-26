@@ -18,11 +18,11 @@ def get_all_painpoints():
          .join(models.Category)
          .switch(models.Painpoint_Category)
          .join(models.Painpoint)
+         .order_by(models.Painpoint.date.desc())
          )
 
 
         returned_list = [model_to_dict(pp_and_c) for pp_and_c in painpoint_categories]
-
 
         ppc_list = []
         ids_so_far = []
@@ -42,7 +42,6 @@ def get_all_painpoints():
         return jsonify(data=ppc_list, status = {'code': 200, 'message': 'it should be working'})
     except models.DoesNotExist:
         return jsonify(data = {}, status = {'code': 401, 'message': 'Error getting all painpoints'})
-
 
 
 
