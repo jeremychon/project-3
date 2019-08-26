@@ -4,13 +4,14 @@ from peewee import *
 from flask_login import UserMixin
 import datetime
 
-DATABASE = connect(os.environ.get('DATABASE_URL'))
-
-# Painpoints_API_DB = SqliteDatabase('painpoint.sqlite')
+if os.environ.get('HEROKU_ON'):
+	DATABASE = connect(os.environ.get('DATABASE_URL'))
+else:
+	DATABASE = SqliteDatabase('painpoint.sqlite')
 
 class BaseModel(Model):
     class Meta:
-        database = Painpoints_API_DB
+        database = DATABASE
 
 class User(UserMixin, BaseModel):
 	full_name = CharField()
