@@ -31,11 +31,11 @@ def load_user(userId):
 	except models.DoesNotExist:
 		return None
 
-CORS(user, origins=['http://localhost:3000', "http://painpoint-api-heroku.com"], supports_credentials=True)
-CORS(solution, origins=['http://localhost:3000', "http://painpoint-api-heroku.com"], supports_credentials=True)
-CORS(category, origins=['http://localhost:3000', "http://painpoint-api-heroku.com"], supports_credentials=True)
-CORS(painpoint, origins=['http://localhost:3000', "http://painpoint-api-heroku.com"], supports_credentials=True)
-CORS(pp, origins=['http://localhost:3000', "http://painpoint-api-heroku.com"], supports_credentials=True)
+CORS(user, origins=['http://localhost:3000', "https://painpoints-api-heroku.herokuapp.com/"], supports_credentials=True)
+CORS(solution, origins=['http://localhost:3000', "https://painpoints-api-heroku.herokuapp.com/"], supports_credentials=True)
+CORS(category, origins=['http://localhost:3000', "https://painpoints-api-heroku.herokuapp.com/"], supports_credentials=True)
+CORS(painpoint, origins=['http://localhost:3000', "https://painpoints-api-heroku.herokuapp.com/"], supports_credentials=True)
+CORS(pp, origins=['http://localhost:3000', "https://painpoints-api-heroku.herokuapp.com/"], supports_credentials=True)
 
 app.register_blueprint(user)
 app.register_blueprint(solution)
