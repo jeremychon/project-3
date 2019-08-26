@@ -2,7 +2,11 @@ from peewee import *
 from flask_login import UserMixin
 import datetime
 
-Painpoints_API_DB = SqliteDatabase('painpoint.sqlite')
+import os
+from playhouse.db_url import connect
+DATABASE = connect(os.environ.get('DATABASE_URL'))
+
+# Painpoints_API_DB = SqliteDatabase('painpoint.sqlite')
 
 class BaseModel(Model):
     class Meta:

@@ -1,3 +1,4 @@
+import os
 from flask import Flask, g
 from flask_cors import CORS
 from flask_login import LoginManager
@@ -31,11 +32,11 @@ def load_user(userId):
 	except models.DoesNotExist:
 		return None
 
-CORS(user, origins=['http://localhost:3000'], supports_credentials=True)
-CORS(solution, origins=['http://localhost:3000'], supports_credentials=True)
-CORS(category, origins=['http://localhost:3000'], supports_credentials=True)
-CORS(painpoint, origins=['http://localhost:3000'], supports_credentials=True)
-CORS(pp, origins=['http://localhost:3000'], supports_credentials=True)
+CORS(user, origins=['http://localhost:3000', 'https://painpointsapp-api-heroku.herokuapp.com'], supports_credentials=True)
+CORS(solution, origins=['http://localhost:3000', 'https://painpointsapp-api-heroku.herokuapp.com'], supports_credentials=True)
+CORS(category, origins=['http://localhost:3000', 'https://painpointsapp-api-heroku.herokuapp.com'], supports_credentials=True)
+CORS(painpoint, origins=['http://localhost:3000', 'https://painpointsapp-api-heroku.herokuapp.com'], supports_credentials=True)
+CORS(pp, origins=['http://localhost:3000', 'https://painpointsapp-api-heroku.herokuapp.com'], supports_credentials=True)
 
 app.register_blueprint(user)
 app.register_blueprint(solution)
@@ -63,6 +64,9 @@ def after_request(response):
 def index():
 	return 'Pain Point'
 
+if 'ON_HEROKU' in os.environ:
+	print('hitting ')
+	models.initialize()
 
 if __name__ == '__main__':
 	models.initialize()
