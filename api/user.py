@@ -95,6 +95,7 @@ def show_all_users():
 @user.route('/login', methods=['POST'])
 def login():
 	payload = request.get_json()
+	# payload['id'] = current_user.id
 	print(payload, '<--- payload from login route')
 
 	try:
