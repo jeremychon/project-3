@@ -24,7 +24,8 @@ def create_solution():
 	# get the idea that is associated with the solution
 
 	print(current_user, '<--- current_user')
-	payload = request.form.to_dict()
+	# payload = request.form.to_dict()
+	payload = request.get_json()
 	payload['owner'] = current_user.id
 	print(payload, '<--- payload in solution create route')
 
