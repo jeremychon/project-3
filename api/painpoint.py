@@ -44,14 +44,35 @@ def get_all_painpoints():
         return jsonify(data = {}, status = {'code': 401, 'message': 'Error getting all painpoints'})
 
 
+# ================ SHOW ALL PAINPOINTS ================ #
+
+@painpoint.route('/all', methods=["GET"])
+def get_painpoints():
+    try:
+        painpoint_categories = (models.Painpoint_Category
+         .select(models.Painpoint_Category, models.Painpoint, models.Category)
+         .join(models.Category)
+         .switch(models.Painpoint_Category)
+         .join(models.Painpoint)
+        )
+        print(painpoint_categories, '<--- painpoint_categories')
+
+        all_painpoints = [model_to_dict(pp) for pp in painpoint_categories]
+        print(all_painpoints, '<---- all_painpoints')
+
+        return jsonify(data=all_painpoints, status={'code': 200, 'message': 'Got all painpoints'})
+
+    except models.DoesNotExist:
+        return jsonify(data={}, status={'code': 401, 'message': 'Error getting painpoints'})
+
 
 # ================ CREATE PAINPOINT ================ #
 @painpoint.route('/', methods=['POST'])
 def create_painpoint():
+
     print('THIS IS REQUEST.GET_JSON', request.get_json())
     # payload = request.form.to_dict()
     payload = request.get_json()
-
     payload['owner'] = current_user.id
     print('THIS IS THE CURRENT_USER.ID', current_user.id)
     try:
