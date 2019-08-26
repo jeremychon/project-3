@@ -70,18 +70,10 @@ def get_painpoints():
 # ================ CREATE PAINPOINT ================ #
 @painpoint.route('/', methods=['POST'])
 def create_painpoint():
-<<<<<<< HEAD
-    print('-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------')
-    print(request, '<---- request in create painpoint')
-    payload = request.get_json()
-    print(payload, '<------ payload')
-    print(current_user.id, '<---- current_user')
-=======
+
     print('THIS IS REQUEST.GET_JSON', request.get_json())
     # payload = request.form.to_dict()
     payload = request.get_json()
-
->>>>>>> df8417e143fdbe17910edb3ea88ea99f47eb2ec4
     payload['owner'] = current_user.id
     print('THIS IS THE CURRENT_USER.ID', current_user.id)
     try:
