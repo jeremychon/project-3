@@ -4,7 +4,7 @@ from flask import Blueprint, request, jsonify
 from flask_login import current_user
 from playhouse.shortcuts import model_to_dict
 
-painpoint = Blueprint('painpoint', 'painpoint', url_prefix="/painpoints")
+painpoint = Blueprint('painpoint', 'painpoint', url_prefix='/painpoints')
 
 
 # ================ SHOW ALL PAINPOINTS (PAINPOINT INDEX)================ #
@@ -22,39 +22,24 @@ def get_all_painpoints():
 
 
         returned_list = [model_to_dict(pp_and_c) for pp_and_c in painpoint_categories]
-        #
-        # print("------")
-        # print("EARLY RETURNED LIST")
-        # print("------")
-        # print(returned_list)
 
-        # return jsonify(data=returned_list, status = {'code': 200, 'message': 'it should be working'})
 
         ppc_list = []
         ids_so_far = []
 
-        #the returned list contains several dictionaries, each of which contains a painpoint dict and a category dict
-        #for each dictionary in the returned list:
+        #return a list of dictionaries, with 'painpoint: {}' and 'categories: [...{}]' keys
         for dictionary in returned_list:
-            # grab the id of the painpoint dict in that dictionary
-            #if the painpoint has already been added to the ppc_list and its id is in the ids_so_far list,
             painpoint_id = dictionary['painpoint']['id']
 
             if painpoint_id in ids_so_far:
-                #find the index of the painpoint in the ppc_list
-                #then, append the category from the main dictionary to the 'categories' list in the ppc_list
                 index_in_ppc_list = next((index for (index, dict) in enumerate(ppc_list) if dict['painpoint'] == dictionary['painpoint']), None)
                 ppc_list[index_in_ppc_list]['categories'].append(dictionary['category'])
 
             else:
-                #if the painpoint has not already been added to the ppc_list
-                #add the painpoint's id to the ids so far list
-                # and then add the painpoint and its associated category to the ppc list
                 ids_so_far.append(painpoint_id)
                 ppc_list.append({'painpoint': dictionary['painpoint'], 'categories': [dictionary['category']]})
 
         return jsonify(data=ppc_list, status = {'code': 200, 'message': 'it should be working'})
-        # return 'check terminal'
     except models.DoesNotExist:
         return jsonify(data = {}, status = {'code': 401, 'message': 'Error getting all painpoints'})
 
@@ -64,15 +49,23 @@ def get_all_painpoints():
 # ================ CREATE PAINPOINT ================ #
 @painpoint.route('/', methods=['POST'])
 def create_painpoint():
-    print('-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------')
+    print('THIS IS REQUEST.GET_JSON', request.get_json())
+    # payload = request.form.to_dict()
     payload = request.get_json()
+
     payload['owner'] = current_user.id
+    print('THIS IS THE CURRENT_USER.ID', current_user.id)
+    try:
+        painpoint = models.Painpoint.create(**payload)
 
-    painpoint = models.Painpoint.create(**payload)
+        painpoint_dict = model_to_dict(painpoint)
+        print('THIS IS THE PAINPOINT DICT: ', painpoint_dict)
+        return jsonify(data=painpoint_dict, status={'code': 201, 'message': 'successfully created painpoint'})
 
-    painpoint_dict = model_to_dict(painpoint)
 
-    return jsonify(data=painpoint_dict, status={'code': 201, 'message': 'successfully created painpoint'})
+    except models.DoesNotExist:
+        return jsonify(data=painpoint_dict, status={'code': 401, 'message': 'There was an error creating a painpoint'})
+
 
 
 # ================ SHOW PAINPOINT ================ #

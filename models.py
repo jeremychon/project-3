@@ -17,11 +17,11 @@ class User(UserMixin, BaseModel):
 class Painpoint(UserMixin, BaseModel):
 	owner = ForeignKeyField(User)
 	date = DateTimeField(default=datetime.datetime.now)
-	head = CharField()
+	head = CharField(max_length=75, default='String10')
 	body = TextField()
-	attachment = CharField()
+	attachment = CharField(default='')
 
-class Painpoint_Votes(BaseModel):
+class Painpoint_Votes(UserMixin, BaseModel):
 	voter = IntegerField()
 	post = IntegerField()
 	vote = SmallIntegerField()
@@ -31,7 +31,7 @@ class Category(UserMixin, BaseModel):
 	category = CharField()
 
 
-class Painpoint_Category(BaseModel):
+class Painpoint_Category(UserMixin, BaseModel):
 	category = ForeignKeyField(Category)
 	painpoint = ForeignKeyField(Painpoint)
 
