@@ -59,6 +59,6 @@ class Solution_Votes(BaseModel):
 
 
 def initialize():
-	Painpoints_API_DB.connect()
-	Painpoints_API_DB.create_tables([User, Solution, Solution_Votes, Category, Painpoint, Painpoint_Category, Painpoint_Votes], safe = True)
-	Painpoints_API_DB.close()
+	DATABASE.connect()
+	DATABASE.create_tables([User, Solution, Solution_Votes, Category, Painpoint, Painpoint_Category, Painpoint_Votes], safe = True)
+	DATABASE.close()
