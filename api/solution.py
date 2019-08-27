@@ -25,8 +25,9 @@ def painpoint_solutions():
 			.where(models.Solution.owner == id)
 		)
 
+		return jsonify(data=model_to_dict(painpoint_solutions), status={'code': 200, 'message': 'Showing all solutions'})
 	except models.DoesNotExist:
-		return jsonify(data=model_to_dict(painpoint_solutions), status={'code': 401, 'message': 'There was an error showing solutions'})
+		return jsonify(data={}, status={'code': 401, 'message': 'There was an error to show all the solutions'})
 
 # ================ CREATE SOLUTION ================ #
 @solution.route('/', methods=['POST'])
