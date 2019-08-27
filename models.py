@@ -4,13 +4,16 @@ import datetime
 
 import os
 from playhouse.db_url import connect
-DATABASE = connect(os.environ.get('DATABASE_URL'))
 
-# Painpoints_API_DB = SqliteDatabase('painpoint.sqlite')
+if os.environ.get('HEROKU_ON'):
+    DATABASE = connect(os.environ.get('DATABASE_URL'))
+else:
+    DATABASE = SqliteDatabase('painpoint.sqlite')
+
 
 class BaseModel(Model):
     class Meta:
-        database = Painpoints_API_DB
+        database = DATABASE
 
 class User(UserMixin, BaseModel):
 	full_name = CharField()
@@ -58,6 +61,6 @@ class Solution_Votes(BaseModel):
 
 
 def initialize():
-	Painpoints_API_DB.connect()
-	Painpoints_API_DB.create_tables([User, Solution, Solution_Votes, Category, Painpoint, Painpoint_Category, Painpoint_Votes], safe = True)
-	Painpoints_API_DB.close()
+	DATABASE.connect()
+	DATABASE.create_tables([User, Solution, Solution_Votes, Category, Painpoint, Painpoint_Category, Painpoint_Votes], safe = True)
+	DATABASE.close()
