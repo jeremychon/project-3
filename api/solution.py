@@ -20,12 +20,9 @@ def all_solutions():
 @solution.route('/<id>', methods=['GET'])
 def painpoint_solutions():
 	try:
-		painpoint_solutions = (models.Solution
-			.select(*)
-			.where(models.Solution.owner == id)
-		)
+		painpoint_solutions = [model_to_dict(solution) for solution in models.Solution.select().where(models.Solution.painpoint == id)]
 
-		return jsonify(data=model_to_dict(painpoint_solutions), status={'code': 200, 'message': 'Showing all solutions'})
+		return jsonify(data=painpoint_solutions, status={'code': 200, 'message': 'Showing all solutions'})
 	except models.DoesNotExist:
 		return jsonify(data={}, status={'code': 401, 'message': 'There was an error to show all the solutions'})
 
