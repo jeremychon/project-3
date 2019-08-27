@@ -4,10 +4,13 @@ from peewee import *
 from flask_login import UserMixin
 import datetime
 
+from playhouse.db_url import connect
+
 if os.environ.get('HEROKU_ON'):
-	DATABASE = connect(os.environ.get('DATABASE_URL'))
+    DATABASE = connect(os.environ.get('DATABASE_URL'))
 else:
-	DATABASE = SqliteDatabase('painpoint.sqlite')
+    DATABASE = SqliteDatabase('painpoint.sqlite')
+
 
 class BaseModel(Model):
     class Meta:
