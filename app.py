@@ -49,7 +49,7 @@ app.register_blueprint(pp)
 @app.before_request
 def before_request():
 	'''Connect to the database'''
-	g.db = models.Painpoints_API_DB
+	g.db = models.DATABASE
 	g.db.connect()
 
 @app.after_request
