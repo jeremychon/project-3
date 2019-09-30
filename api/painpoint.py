@@ -55,10 +55,10 @@ def get_painpoints():
          .switch(models.Painpoint_Category)
          .join(models.Painpoint)
         )
-        print(painpoint_categories, '<--- painpoint_categories')
+        # print(painpoint_categories, '<--- painpoint_categories')
 
         all_painpoints = [model_to_dict(pp) for pp in painpoint_categories]
-        print(all_painpoints, '<---- all_painpoints')
+        # print(all_painpoints, '<---- all_painpoints')
 
         return jsonify(data=all_painpoints, status={'code': 200, 'message': 'Got all painpoints'})
 
@@ -74,12 +74,12 @@ def create_painpoint():
     # payload = request.form.to_dict()
     payload = request.get_json()
     payload['owner'] = current_user.id
-    print('THIS IS THE CURRENT_USER.ID', current_user.id)
+    # print('THIS IS THE CURRENT_USER.ID', current_user.id)
     try:
         painpoint = models.Painpoint.create(**payload)
 
         painpoint_dict = model_to_dict(painpoint)
-        print('THIS IS THE PAINPOINT DICT: ', painpoint_dict)
+        # print('THIS IS THE PAINPOINT DICT: ', painpoint_dict)
         return jsonify(data=painpoint_dict, status={'code': 201, 'message': 'successfully created painpoint'})
 
 
@@ -97,7 +97,7 @@ def get_painpoint(id):
 # ================ UPDATE PAINPOINT ================ #
 @painpoint.route('/<id>', methods = ['PUT'])
 def update_painpoint(id):
-    print('--------- Hitting update painpoint route ---------')
+    # print('--------- Hitting update painpoint route ---------')
 
     payload = request.get_json()
 

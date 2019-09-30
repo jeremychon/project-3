@@ -17,7 +17,7 @@ def get_category():
 @category.route('/', methods=["POST"])
 def create_category():
     payload = request.get_json()
-    print(payload, '<--- this is the requested payload in the create category route')
+    # print(payload, '<--- this is the requested payload in the create category route')
 
     category = models.Category.create(**payload)
     category_dict = model_to_dict(category)
