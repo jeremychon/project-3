@@ -14,12 +14,12 @@ def get_all_painpoints():
 
     try:
         painpoint_categories = (models.Painpoint_Category
-         .select(models.Painpoint_Category, models.Painpoint, models.Category)
-         .join(models.Category)
-         .switch(models.Painpoint_Category)
-         .join(models.Painpoint)
-         .order_by(models.Painpoint.date.desc())
-         )
+            .select(models.Painpoint_Category, models.Painpoint, models.Category)
+            .join(models.Category)
+            .switch(models.Painpoint_Category)
+            .join(models.Painpoint)
+            .order_by(models.Painpoint.date.desc())
+        )
 
 
         returned_list = [model_to_dict(pp_and_c) for pp_and_c in painpoint_categories]
@@ -55,10 +55,8 @@ def get_painpoints():
          .switch(models.Painpoint_Category)
          .join(models.Painpoint)
         )
-        # print(painpoint_categories, '<--- painpoint_categories')
 
         all_painpoints = [model_to_dict(pp) for pp in painpoint_categories]
-        # print(all_painpoints, '<---- all_painpoints')
 
         return jsonify(data=all_painpoints, status={'code': 200, 'message': 'Got all painpoints'})
 
@@ -70,18 +68,15 @@ def get_painpoints():
 @painpoint.route('/', methods=['POST'])
 def create_painpoint():
 
-    print('THIS IS REQUEST.GET_JSON', request.get_json())
-    # payload = request.form.to_dict()
     payload = request.get_json()
     payload['owner'] = current_user.id
-    # print('THIS IS THE CURRENT_USER.ID', current_user.id)
+
     try:
         painpoint = models.Painpoint.create(**payload)
 
         painpoint_dict = model_to_dict(painpoint)
-        # print('THIS IS THE PAINPOINT DICT: ', painpoint_dict)
-        return jsonify(data=painpoint_dict, status={'code': 201, 'message': 'successfully created painpoint'})
 
+        return jsonify(data=painpoint_dict, status={'code': 201, 'message': 'successfully created painpoint'})
 
     except models.DoesNotExist:
         return jsonify(data=painpoint_dict, status={'code': 401, 'message': 'There was an error creating a painpoint'})
@@ -97,7 +92,6 @@ def get_painpoint(id):
 # ================ UPDATE PAINPOINT ================ #
 @painpoint.route('/<id>', methods = ['PUT'])
 def update_painpoint(id):
-    # print('--------- Hitting update painpoint route ---------')
 
     payload = request.get_json()
 
