@@ -32,18 +32,13 @@ def create_solution():
 
 	# get the idea that is associated with the solution
 
-	print(current_user, '<--- current_user')
-	# payload = request.form.to_dict()
 	payload = request.get_json()
 	payload['owner'] = current_user.id
-	print(payload, '<--- payload in solution create route')
 
 	try:
 		solution = models.Solution.create(**payload)
-		print(solution, '<--- solution in solution create route')
 
 		solution_dict = model_to_dict(solution)
-		print(solution_dict, '<---- solution_dict')
 
 		return jsonify(data=solution_dict, status={'code': 200, 'message': 'Create solution successful'})
 
@@ -56,14 +51,12 @@ def create_solution():
 @solution.route('/<id>', methods=['PUT'])
 def update_solution(id):
 	payload = request.get_json()
-	print(payload, '<--- payload in update solution route')
 
 	try:
 		query = models.Solution.update(**payload).where(models.Solution.id == id)
 		query.execute()
 
 		updated_solution = models.Solution.get_by_id(id)
-		print(model_to_dict(updated_solution), '<--- updated solution after query executes')
 
 		return jsonify(data=model_to_dict(updated_solution), status={'code': 200, 'message': 'Updated solution successfully'})
 	except models.DoesNotExist:
@@ -82,20 +75,20 @@ def delete_solution(id):
 		return None
 
 
-# ================ CHANGE VOTE ================ #
+# ================ CHANGE VOTE (currently unavailable) ================ #
 @solution.route('/<id>/vote', methods=['POST'])
 def change_solution_rating(id):
 	payload = request.get_json()
-	print(payload, '<--- payload in solution vote')
+	# print(payload, '<--- payload in solution vote')
 	payload['voter'] = current_user.id
 	payload['post'] = int(id)
-	print(payload, '<--- payload in solution vote after adding ids')
+	# print(payload, '<--- payload in solution vote after adding ids')
 
 	try:
 		vote = models.Solution_Votes.create(**payload)
-		print(vote, '<---- created vote')
+		# print(vote, '<---- created vote')
 		vote_dict = model_to_dict(vote)
-		print(vote_dict, '<--- vote_dict')
+		# print(vote_dict, '<--- vote_dict')
 
 		return jsonify(data=vote_dict, status={'code': 200, 'message': 'Solution vote success'})
 

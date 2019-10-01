@@ -16,7 +16,7 @@ from playhouse.shortcuts import model_to_dict
 user = Blueprint('user', 'user', url_prefix='/user')
 
 
-# ================ REGISTER ================ #
+# =========== REGISTER (currently unable to add picture) ========== #
 # def save_picture(form_picture):
 # 	random_hex = secrets.token_hex(8)
 
@@ -68,12 +68,12 @@ def register():
 		# payload['image'] = file_picture_path
 
 		user = models.User.create(**payload)
-		print(user, '<--- registered user')
+		# print(user, '<--- registered user')
 
 		login_user(user)
 
 		user_dict = model_to_dict(user)
-		print(user_dict, '<--- user_dict in register route')
+		# print(user_dict, '<--- user_dict in register route')
 
 		del user_dict['password']
 
@@ -96,13 +96,12 @@ def show_all_users():
 def login():
 	payload = request.get_json()
 	# payload['id'] = current_user.id
-	print(payload, '<--- payload from login route')
+	# print(payload, '<--- payload from login route')
 
 	try:
 		user = models.User.get(models.User.email == payload['email'])
-		print(user, '<--- found user')
+
 		user_dict = model_to_dict(user)
-		print(user_dict, '<--- user_dict')
 
 		if check_password_hash(user_dict['password'], payload['password']):
 			del user_dict['password']
@@ -122,9 +121,8 @@ def get_user(id):
 	try:
 
 		user = models.User.get(models.User.id == id)
-		print(user, '<--- user')
+
 		user_dict = model_to_dict(user)
-		print(user_dict, '<--- user_dict')
 
 		all_painpoints = [model_to_dict(painpoint) for painpoint in models.Painpoint.select().where(models.Painpoint.owner == id)]
 
@@ -168,4 +166,6 @@ def update_user(id):
 def logout():
 	logout_user()
 	return 'You are logged out'
-	# return redirect('http://localhost:8000/')
+
+
+
