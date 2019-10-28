@@ -16,6 +16,15 @@ def all_solutions():
 	except models.DoesNotExist:
 		return jsonify(data={}, status={'code': 401, 'message': 'There was an error to show all the solutions'})
 
+# ================ GET ALL SOLUTIONS FOR SPECIFIC PAINPOINT ================ #
+@solution.route('/<id>', methods=['GET'])
+def painpoint_solutions():
+	try:
+		painpoint_solutions = [model_to_dict(solution) for solution in models.Solution.select().where(models.Solution.painpoint == id)]
+
+		return jsonify(data=painpoint_solutions, status={'code': 200, 'message': 'Showing all solutions'})
+	except models.DoesNotExist:
+		return jsonify(data={}, status={'code': 401, 'message': 'There was an error to show all the solutions'})
 
 # ================ CREATE SOLUTION ================ #
 @solution.route('/', methods=['POST'])
