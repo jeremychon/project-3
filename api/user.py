@@ -48,7 +48,7 @@ def register():
 	# form info
 	# payload = request.get_json()
 	payload = request.form.to_dict()
-	# print(payload, '<--- payload in user register route')
+	print(payload, '<--- payload in user register route')
 	# dict_file = pay_file.to_dict()
 	# print(dict_file, '<--- dict_file')
 
@@ -95,8 +95,6 @@ def show_all_users():
 @user.route('/login', methods=['POST'])
 def login():
 	payload = request.get_json()
-	# payload['id'] = current_user.id
-	# print(payload, '<--- payload from login route')
 
 	try:
 		user = models.User.get(models.User.email == payload['email'])
@@ -111,8 +109,9 @@ def login():
 		else:
 			return jsonify(data={}, status={'code': 401, 'message': 'Incorrect username and/or password'})
 
-	except models.DoesNotExist:
+	except models.User.DoesNotExist:
 		return jsonify(data={}, status={'code': 401, 'message': 'Incorrect username and/or password'})
+
 
 
 # ================ GET USER INFO ================ #

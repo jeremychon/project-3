@@ -21,7 +21,6 @@ def get_all_painpoints():
             .order_by(models.Painpoint.date.desc())
         )
 
-
         returned_list = [model_to_dict(pp_and_c) for pp_and_c in painpoint_categories]
 
         ppc_list = []
@@ -86,8 +85,19 @@ def create_painpoint():
 # ================ SHOW PAINPOINT ================ #
 @painpoint.route('/<id>', methods=['GET'])
 def get_painpoint(id):
-    painpoint = models.Painpoint.get_by_id(id)
-    return jsonify(data=model_to_dict(painpoint), status={"code": 200, "message": "Success"})
+
+    painpoint = model_to_dict(models.Painpoint.get_by_id(id))
+    pp_cats = []
+
+    categories = models.Category.select(models.Category, models.Painpoint_Category).join(models.Painpoint_Category).where(models.Painpoint_Category.painpoint == id)
+
+    for cat in categories:
+        pp_cats.append(model_to_dict(cat))
+
+    pp_join_cats = {'painpoint': painpoint, 'categories': pp_cats}
+
+    return jsonify(data=pp_join_cats, status={"code": 200, "message": "Success"})
+
 
 # ================ UPDATE PAINPOINT ================ #
 @painpoint.route('/<id>', methods = ['PUT'])
